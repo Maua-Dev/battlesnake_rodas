@@ -44,11 +44,11 @@ class GameBoard:
         near_snake, move = self.get_near_snake_head(me)
            
         if len(self.food) > 0 and near_snake is None:
-            move = self.next_position(me.head, self.get_food(me))
+            move = self.navigate(me.head, self.get_food(me))
         elif near_snake is not None:
-            move = self.next_position(me.head, near_snake.head)
+            move = self.navigate(me.head, near_snake.head)
         else:
-            move = self.next_position(me.head, me.body[0])
+            move = self.navigate(me.head, me.body[0])
         
         return move
 

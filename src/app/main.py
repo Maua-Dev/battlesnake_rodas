@@ -20,10 +20,10 @@ def read_root():
 
 @app.post("/start")
 def start_battle(request: dict):
-    print("Start")
+
     print(request)
 
-    GameBoard = GameBoard.from_json(request["GameBoard"])
+    board = GameBoard.from_json(request["GameBoard"])
     winner_snake = Snake.from_json(request["you"])
 
     return
@@ -32,16 +32,13 @@ def start_battle(request: dict):
 @app.post("/move")
 def move(request: dict):
 
-    GameBoard = GameBoard.from_json(request["GameBoard"])
+    board = GameBoard.from_json(request["GameBoard"])
     winner_snake = Snake.from_json(request["you"])
-
-    move = GameBoard.where_to_go(winner_snake)
-
+    move = GameBoard.next_position(winner_snake)
     move = GameBoard.dodge_snake_body(winner_snake, move)
 
     response = {
-        "move": move,
-        "shout": Snake.random_shout()
+        "move": move
     }
 
     return response
