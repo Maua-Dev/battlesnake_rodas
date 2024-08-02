@@ -9,11 +9,9 @@ class Coordinates:
         self.x = x
         self.y = y
 
-    def __eq__(self, other):
-        return self.x == other.x and self.y == other.y
-    
-    def __repr__(self):
-        return f"Coordinate: {self.x},{self.y}"
+    @staticmethod
+    def from_json(json):
+        return Coordinates(json['x'], json['y'])
     
     @staticmethod
     def distance(first,second):
@@ -30,3 +28,9 @@ class Coordinates:
             return Coordinates(self.x + 1, self.y)
         else:
             return Coordinates(self.x, self.y)
+        
+    def __eq__(self, other):
+        return self.x == other.x and self.y == other.y
+    
+    def __repr__(self):
+        return f"Coordinate: {self.x},{self.y}"
