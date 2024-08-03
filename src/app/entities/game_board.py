@@ -53,11 +53,11 @@ class GameBoard:
         return move
 
     def get_food(self, snake: Snake):
-        food = self.food[0]
+        close_food = self.food[0]
         for food in self.food:
             if Coordinates.distance(snake.head, food) < Coordinates.distance(snake.head, food):
-                food = food
-        return food
+                close_food = food
+        return close_food
     
     def is_snake(self, move: str, head: Coordinates):
         coordinates = head.moviment(move)

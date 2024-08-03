@@ -1,4 +1,3 @@
-from random import randint
 from typing import List
 from .coordinates import Coordinates
 
