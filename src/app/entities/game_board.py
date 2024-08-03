@@ -60,9 +60,9 @@ class GameBoard:
         return close_food
     
     def is_snake(self, move: str, head: Coordinates):
-        coordinates = head.moviment(move)
+        coordinate = head.moviment(move)
         for snake in self.snakes:
-            if snake.is_inside_snake(coordinates):
+            if snake.is_inside_snake(coordinate):
                 return snake
         return False
     
@@ -107,14 +107,14 @@ class GameBoard:
         if move is not None:
             coordinate = me.head.moviment(move)
             for snake in self.snakes:
-                if snake.is_near_head(Coordinates) and snake.snake_id != me.snake_id:
+                if snake.is_near_head(coordinate) and snake.snake_id != me.snake_id:
                     return snake, move
             return None, None
         
         for move in ["up", "down", "left", "right"]:
-            Coordinates = me.head.moviment(move)
+            coordinate = me.head.moviment(move)
             for snake in self.snakes:
-                if snake.is_near_head(Coordinates) and snake.snake_id != me.snake_id:
+                if snake.is_near_head(coordinate) and snake.snake_id != me.snake_id:
                     return snake, move
         return None, None
     
