@@ -34,8 +34,8 @@ def move(request: dict):
 
     board = Board.from_json(request["board"])
     winner_snake = Snake.from_json(request["you"])
-    move = Board.next_position(winner_snake)
-    move = Board.dodge_snake_body(winner_snake, move)
+    move = board.next_position(winner_snake)
+    move = board.dodge_snake_body(winner_snake, move)
 
     response = {
         "move": move
