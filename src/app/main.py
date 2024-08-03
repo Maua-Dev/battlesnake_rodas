@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from mangum import Mangum
 from .entities.snake import Snake
-from .entities.game_board import GameBoard
+from .entities.game_board import Board
 
 app = FastAPI()
 
@@ -23,7 +23,7 @@ def start_battle(request: dict):
 
     print(request)
 
-    board = GameBoard.from_json(request["board"])
+    board = Board.from_json(request["board"])
     winner_snake = Snake.from_json(request["you"])
 
     return
@@ -32,10 +32,10 @@ def start_battle(request: dict):
 @app.post("/move")
 def move(request: dict):
 
-    board = GameBoard.from_json(request["board"])
+    board = Board.from_json(request["board"])
     winner_snake = Snake.from_json(request["you"])
-    move = GameBoard.next_position(winner_snake)
-    move = GameBoard.dodge_snake_body(winner_snake, move)
+    move = Board.next_position(winner_snake)
+    move = Board.dodge_snake_body(winner_snake, move)
 
     response = {
         "move": move

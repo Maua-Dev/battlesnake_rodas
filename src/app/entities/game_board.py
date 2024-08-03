@@ -3,7 +3,7 @@ from .snake import Snake
 from .coordinates import Coordinates
 
 
-class GameBoard:
+class Board:
     height: int
     width: int
     food: List[Coordinates]
@@ -24,7 +24,7 @@ class GameBoard:
         food = [Coordinates.from_json(food) for food in json["food"]]
         snakes = [Snake.from_json(snake) for snake in json["snakes"]]
         hazards = [Coordinates.from_json(hazard) for hazard in json["hazards"]]
-        return GameBoard(height, width, food, snakes, hazards)
+        return Board(height, width, food, snakes, hazards)
 
     @staticmethod
     def navigate(start: Coordinates, end: Coordinates) -> str:
@@ -122,5 +122,5 @@ class GameBoard:
         return self.height == other.height and self.width == other.width and self.food == other.food and self.snakes == other.snakes and self.hazards == other.hazards
     
     def __repr__(self):
-        return f"GameBoard: {self.width}x{self.height}"
+        return f"Board: {self.width}x{self.height}"
         
