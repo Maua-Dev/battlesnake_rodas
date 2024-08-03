@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from mangum import Mangum
 from .entities.snake import Snake
-from .entities.game_board import Board
+from .entities.board import Board
 
 app = FastAPI()
 
