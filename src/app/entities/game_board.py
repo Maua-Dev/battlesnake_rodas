@@ -11,9 +11,9 @@ class GameBoard:
     hazards: List[Snake]
 
     def __init__(self, height: int, width: int, food: List[Coordinates], snakes: List[Coordinates], hazards: List[Snake]):
-        self.food = food
         self.height = height
         self.width = width
+        self.food = food
         self.snakes = snakes
         self.hazards = hazards
 
@@ -60,16 +60,16 @@ class GameBoard:
         return food
     
     def is_snake(self, move: str, head: Coordinates):
-        Coordinates = head.move_command(move)
+        coordinates = head.moviment(move)
         for snake in self.snakes:
-            if snake.is_inside_snake(Coordinates):
+            if snake.is_inside_snake(coordinates):
                 return snake
         return False
     
     def is_hazard(self, move: str, head: Coordinates):
-        Coordinates = head.move_command(move)
+        coordinates = head.moviment(move)
         for hazard in self.hazards:
-            if hazard == Coordinates:
+            if hazard == coordinates:
                 return True
         return False
 
@@ -83,8 +83,8 @@ class GameBoard:
         return old_move
     
     def is_out_of_bounds(self, move: str, head: Coordinates):
-        Coordinates = head.move_command(move)
-        if Coordinates.x < 0 or Coordinates.x >= self.width or Coordinates.y < 0 or Coordinates.y >= self.height:
+        coordinates = head.moviment(move)
+        if coordinates.x < 0 or coordinates.x >= self.width or coordinates.y < 0 or coordinates.y >= self.height:
             return True
         return False
     
@@ -105,14 +105,14 @@ class GameBoard:
     
     def get_near_snake_head(self, me: Snake, move: str = None) -> Tuple[Optional[Snake], Optional[str]]:
         if move is not None:
-            Coordinates = me.head.move_command(move)
+            coordinate = me.head.moviment(move)
             for snake in self.snakes:
                 if snake.is_near_head(Coordinates) and snake.snake_id != me.snake_id:
                     return snake, move
             return None, None
         
         for move in ["up", "down", "left", "right"]:
-            Coordinates = me.head.move_command(move)
+            Coordinates = me.head.moviment(move)
             for snake in self.snakes:
                 if snake.is_near_head(Coordinates) and snake.snake_id != me.snake_id:
                     return snake, move

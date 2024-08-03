@@ -1,6 +1,5 @@
 from math import sqrt
 
-
 class Coordinates:
     x: float
     y: float

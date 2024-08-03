@@ -11,11 +11,8 @@ class Snake:
     latency: str
     head: Coordinates
     length: int
-    shout: str
-    squad: str
-    
-    
-    def __init__(self, snake_id: str, name: str, health: int, body: List[Coordinates], latency: str, head: Coordinates, length: int, shout: str, squad: str):
+
+    def __init__(self, snake_id: str, name: str, health: int, body: List[Coordinates], latency: str, head: Coordinates, length: int):
         self.snake_id = snake_id
         self.name = name
         self.health = health
@@ -23,8 +20,6 @@ class Snake:
         self.latency = latency
         self.head = head
         self.length = length
-        self.shout = shout
-        self.squad = squad
 
     @staticmethod
     def from_json(json):
@@ -35,9 +30,7 @@ class Snake:
         latency = json["latency"]
         head = Coordinates.from_json(json["head"])
         length = json["length"]
-        shout = json["shout"]
-        squad = json.get("squad", "")
-        return Snake(snake_id, name, health, body, latency, head, length, shout, squad)
+        return Snake(snake_id, name, health, body, latency, head, length)
     
     def is_inside_snake(self, coordinate: Coordinates):
         for body in self.body:
@@ -51,7 +44,7 @@ class Snake:
         return False
     
     def __eq__(self, other):
-        return self.snake_id == other.snake_id and self.name == other.name and self.health == other.health and self.body == other.body and self.latency == other.latency and self.head == other.head and self.length == other.length and self.shout == other.shout and self.squad == other.squad
+        return self.snake_id == other.snake_id and self.name == other.name and self.health == other.health and self.body == other.body and self.latency == other.latency and self.head == other.head and self.length == other.length
 
     def __repr__(self):
         return f"Snake: {self.name} ({self.snake_id})"
